@@ -43,12 +43,13 @@ class Table extends Component {
   render() {
     return (
       <div
-        className="ag-theme-alpine p-3"
+        className="ag-theme-alpine container"
         style={{
-            height: '500px',
-            width: '1300px' ,
-          
-            margin:'20px'
+            height: '100%',
+            width: '100%' ,
+            
+            
+            
         }}
       >
         <AgGridReact
