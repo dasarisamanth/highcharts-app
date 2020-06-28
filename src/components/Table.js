@@ -11,9 +11,9 @@ class Table extends Component {
     super(props);
     this.state = {
       columnDefs: [{
-        field: "turbine_name", width: 130
+        field: "turbine_name", width: 130,pinned:"left"
       }, {
-        headerName: "Service Req Type", field: "sr_type",width: 150,margin:20
+        headerName: "Service Req Type", field: "sr_type",width: 150,margin:20,pinned:"left"
       },
       {
         headerName: "Service Request Description",field: "service_req_description",sortable: true, filter: true,width:300
@@ -45,7 +45,7 @@ class Table extends Component {
       <div
         className="ag-theme-alpine container"
         style={{
-            height: '100%',
+            height: '80%',
             width: '100%' ,
             
             
