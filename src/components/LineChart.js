@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Highcharts from "highcharts/highcharts";
 import HighChartsReact from "highcharts-react-official";
-import { data } from "./maintainence_data";
+import { data } from "../maintainence_data";
 import {Link} from 'react-router-dom';
 class LineChart extends Component {
   state = {

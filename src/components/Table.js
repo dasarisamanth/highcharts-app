@@ -3,7 +3,7 @@ import './App.css';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { data } from "./maintainence_data";
+import { data } from "../maintainence_data";
 import {Link} from 'react-router-dom';
 
 class Table extends Component {

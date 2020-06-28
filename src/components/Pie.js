@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { data } from "./maintainence_data";
+import { data } from "../maintainence_data";
 import Highcharts from "highcharts";
 import {Link} from 'react-router-dom';
 

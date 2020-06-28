@@ -1,13 +1,13 @@
 import React from "react";
 
-import BarChart from "./BarChart";
-import LineChart from "./LineChart";
-import Pie from "./Pie";
-import PieChar from "./PieChar";
-import Table from "./Table";
-import Navbar from "./Navbar";
+import BarChart from "../components/BarChart";
+import LineChart from "../components/LineChart";
+import Pie from "../components/Pie";
+import PieChar from "../components/PieChar";
+import Table from "../components/Table";
+import Navbar from "../components/Navbar";
 import { Switch, Route } from "react-router-dom";
-import HomePage from "./HomePage";
+import HomePage from "../components/HomePage";
 
 function App() {
   return (
