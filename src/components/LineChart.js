@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import Highcharts from "highcharts/highcharts";
 import HighChartsReact from "highcharts-react-official";
-import { data } from "../maintainence_data";
-import {Link} from 'react-router-dom';
+
 class LineChart extends Component {
-  state = {
+ constructor(props){
+   super(props);
+   this.state = {
     srData: [],
   };
+ }
 
   componentDidMount() {
-    let Data = data
+    let Data = this.props.data
       .map((item) => {
         return {
           service_date: new Date(item.service_date.split("T")[0]),
@@ -22,6 +24,23 @@ class LineChart extends Component {
       })
       .reverse();
     this.setState({ srData: [...this.state.srData, ...Data] });
+  }
+  componentDidUpdate(prevProps,prevState){
+    if(prevProps.data!==this.props.data){
+      let Data = this.props.data
+      .map((item) => {
+        return {
+          service_date: new Date(item.service_date.split("T")[0]),
+          extended_cost: item.extended_cost_$,
+          labour_cost: item.labour_cost_$,
+        };
+      })
+      .sort((a, b) => {
+        return b.service_date - a.service_date;
+      })
+      .reverse();
+    this.setState({ srData: [...Data] });
+  }
   }
   extended_cost = () => {
     const { srData } = this.state;
@@ -73,7 +92,7 @@ class LineChart extends Component {
       plotOptions: {
         series: {
           marker: {
-            enabled: true,
+            enabled: false,
           },
         },
       },
@@ -114,9 +133,9 @@ class LineChart extends Component {
       },
     };
     return (
-      <div className="p-4">
+      <div className=" col-md-6 mb-4 p-4">
         <HighChartsReact options={options} highcharts={Highcharts} />
-        <Link  className='btn btn-light mt-2'to='/'>Back</Link>
+        
       </div>
     );
   }

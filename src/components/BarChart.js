@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import Highcharts from "highcharts/highcharts";
 import HighChartsReact from "highcharts-react-official";
-import { data } from "../maintainence_data";
-import { Link } from "react-router-dom";
+
 import { cost } from "../components/helper";
 class BarChart extends Component {
-  state = {
-    srData: [],
-    cat: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      srData: [],
+      cat: [],
+    };
+  }
+
   componentDidMount() {
-    let Data = data.map((item) => {
+    let Data = this.props.data.map((item) => {
+      console.log(this.props.data);
       return {
         sr_type: item.sr_type,
         labour_cost: item.labour_cost_$,
@@ -22,6 +26,19 @@ class BarChart extends Component {
       this.setState({ cat: [...this.state.cat, ...cat] });
     });
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.data !== this.props.data) {
+      let Data = this.props.data.map((item) => {
+        console.log(this.props.data);
+        return {
+          sr_type: item.sr_type,
+          labour_cost: item.labour_cost_$,
+          extended_cost: item.extended_cost_$,
+        };
+      });
+      this.setState({ srData: Data });
+    }
+  }
   extended_cost = (data, costType) => {
     return cost(data, costType);
   };
@@ -31,6 +48,7 @@ class BarChart extends Component {
 
   render() {
     const { cat, srData } = this.state;
+    console.log(srData);
     console.log(this.labour_cost(srData, "labour_cost"));
 
     const options = {
@@ -78,11 +96,8 @@ class BarChart extends Component {
       },
       plotOptions: {
         column: {
-          stacking: "normal",
-
-          dataLabels: {
-            enabled: true,
-          },
+          pointPadding: 0.2,
+          borderWidth: 0,
         },
       },
       series: [
@@ -97,11 +112,8 @@ class BarChart extends Component {
       ],
     };
     return (
-      <div className="p-4">
+      <div className=" col-md-6 mb-4 p-4">
         <HighChartsReact options={options} highcharts={Highcharts} />
-        <Link className="btn btn-light mt-2" to="/">
-          Back
-        </Link>
       </div>
     );
   }
